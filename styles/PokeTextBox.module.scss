@@ -1,0 +1,42 @@
+.listBox {
+  width: 14rem;
+  margin: 0;
+  padding: 0;
+  z-index: 1;
+  position: absolute;
+  list-style: none;
+  background-color: white;
+  overflow: auto;
+  max-height: 15rem;
+  border: 1px solid rgba(0,0,0,.25);
+  &li[data-focus=true] {
+    background-color: #4a8df6;
+    color: white;
+    cursor: pointer;
+  };
+  &li:active {
+    background-color: #2977f5;
+    color: white;
+  };
+}
+
+.listItem {
+  display: block;
+  height: 3rem;
+  line-height: 3rem;
+  -webkit-box-align: center; /* safari, Chrome対応 */
+  -moz-box-align: center;    /* Firefox対応 */
+  -o-box-align: center;      /* Opera対応 */
+  -ms-box-align: center;     /* IE対応 */
+  box-align: center;         /* ベンダープレフィックス無しも併記する */
+  cursor: pointer;
+}
+
+.listItemImage {
+  vertical-align: middle;
+}
+
+.emptyImage {
+  width: 3rem;
+  display: inline-block;
+}
