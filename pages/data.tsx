@@ -7,8 +7,8 @@ const Data = ({ data }) => {
     <div>
       <ul>
         {data &&
-          data.map((todo) => (
-            <DataDetail key={todo.id} data={todo} />
+          data.map((x) => (
+            <DataDetail key={x.id} data={x} />
           ))}
       </ul>
     </div>
