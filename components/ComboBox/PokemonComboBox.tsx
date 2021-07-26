@@ -7,12 +7,38 @@ import styles from '../../styles/PokeTextBox.module.scss'
 import Image from '../../components/Images/Image'
 
 interface Props {
-  id: string,
+  index: string,
+  data?: {
+    id: string,
+    no: string,
+    name: string
+  },
   onChange: any
 }
 
 const PokemonComboBox: React.FC<Props> = (props) => {
-  const [value, setValue] = React.useState(null);
+  const [selected, setSelected] = React.useState(null);
+  const textFieldRef = React.useRef(null);
+
+  React.useEffect(() => {
+    if (props.data) {
+      setSelected(props.data);
+    }
+    const textField = textFieldRef.current;
+    textField.addEventListener('keydown', handleKeyPress);
+
+    return () => {
+      textField.removeEventListener('keydown', handleKeyPress);
+    };
+  }, [])
+
+  // Ctrl+Xでテキストフィールドをクリアする
+  const handleKeyPress = e => {
+    if (e.ctrlKey && e.keyCode === 88) {
+      setSelected({ ...selected, name: "" });
+    }
+  };
+
   const {
     getRootProps,
     getInputProps,
@@ -20,7 +46,7 @@ const PokemonComboBox: React.FC<Props> = (props) => {
     getOptionProps,
     groupedOptions,
   } = useAutocomplete({
-    id: props.id,
+    id: props.index,
     options: testdata,
     getOptionLabel: (option: any) => {
       if (typeof option === 'string') {
@@ -32,27 +58,31 @@ const PokemonComboBox: React.FC<Props> = (props) => {
       return option.name;
     },
     onChange: (event, newValue) => {
-      setValue(newValue);
+      setSelected(newValue);
       if (newValue === null) {
-        props.onChange({ id: null, no: null, name: null})
+        props.onChange({ id: null, no: null, name: null })
         return
       }
       props.onChange(newValue)
     },
+    onInputChange: (props, input) => {
+      setSelected({ ...selected, name: input });
+      return
+    }
   });
 
   return (
     <div>
       <div {...getRootProps()}>
-        <TextField variant="outlined" {...getInputProps()} />
+        <TextField variant="outlined" {...getInputProps()} value={selected ? selected.name : ""} inputRef={textFieldRef} />
         {
-          value !== null ? 
-          <Image
-            id={value.id}
-            width={48}
-            height={48}
-          /> :
-          <span className={styles.emptyImage} />}
+          (selected !== null && selected.id) ?
+            <Image
+              id={selected.id}
+              width={48}
+              height={48}
+            /> :
+            <span className={styles.emptyImage} />}
       </div>
       {groupedOptions.length > 0 ? (
         <ul className={styles.listBox} {...getListboxProps()}>
@@ -76,13 +106,13 @@ const PokemonComboBox: React.FC<Props> = (props) => {
 export default PokemonComboBox;
 
 const testdata = [
-  { id: 'n1', no: '001', name: 'フシギダネ'},
-  { id: 'n2', no: '002', name: 'フシギソウ'},
-  { id: 'n3', no: '003', name: 'フシギバナ'},
-  { id: 'n4', no: '004', name: 'ヒトカゲ'},
-  { id: 'n5', no: '005', name: 'リザード'},
-  { id: 'n6', no: '006', name: 'リザードン'},
-  { id: 'n7', no: '007', name: 'ゼニガメ'},
-  { id: 'n8', no: '008', name: 'カメール'},
-  { id: 'n9', no: '009', name: 'カメックス'},
+  { id: 'n1', no: '001', name: 'フシギダネ' },
+  { id: 'n2', no: '002', name: 'フシギソウ' },
+  { id: 'n3', no: '003', name: 'フシギバナ' },
+  { id: 'n4', no: '004', name: 'ヒトカゲ' },
+  { id: 'n5', no: '005', name: 'リザード' },
+  { id: 'n6', no: '006', name: 'リザードン' },
+  { id: 'n7', no: '007', name: 'ゼニガメ' },
+  { id: 'n8', no: '008', name: 'カメール' },
+  { id: 'n9', no: '009', name: 'カメックス' },
 ];

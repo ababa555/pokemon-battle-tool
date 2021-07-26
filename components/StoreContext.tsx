@@ -1,15 +1,15 @@
 import React from 'react';
 import ArrayHelper from '../helpers/ArrayHelper'
 
-interface StoreState {
-  x: {index: string, data: object}[],
-  y: {index: string, data: object}[],
+export interface StoreState {
+  x: { index: string, id: string, no: string, name: string }[],
+  y: { index: string, id: string, no: string, name: string }[],
   version: number,
 }
 
 interface PayloadState {
-  x?: {index: string, data: object},
-  y?: {index: string, data: object},
+  x?: { index: string, data: object },
+  y?: { index: string, data: object },
   version?: number,
 }
 
@@ -32,7 +32,7 @@ const initialState = {
 }
 
 const reducer: React.Reducer<StoreState, StoreAction> = (state, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case 'SET_X':
       const x = ArrayHelper.addOrReplace(state.x, { ...action.payload.x }, (a, b) => a.index === b.index)
       return { ...state, x: x.filter(v => v.id !== null) }
@@ -41,8 +41,7 @@ const reducer: React.Reducer<StoreState, StoreAction> = (state, action) => {
       return { ...state, y: y.filter(v => v.id !== null) }
     case 'SET_VERSION':
       return { ...state, version: action.payload.version }
-    case 'RESET':
-      return initialState
+
     default:
       return state
   }
@@ -51,10 +50,10 @@ const reducer: React.Reducer<StoreState, StoreAction> = (state, action) => {
 const StoreProvider: React.FC = (props) => {
   const [state, dispatch] = React.useReducer(reducer, initialState)
   return (
-    <StoreContext.Provider value={{state, dispatch}}>
+    <StoreContext.Provider value={{ state, dispatch }}>
       {props.children}
     </StoreContext.Provider>
-  )  
+  )
 }
 
 export default StoreProvider

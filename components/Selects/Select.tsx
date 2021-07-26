@@ -30,7 +30,6 @@ const Select: React.VFC<Props> = (props) => {
         value={props.value}
         label={props.label}
         onChange={handleChange}
-        { ...props }
       >
         {
           props.data?.map((data) => <MenuItem key={data.value} value={data.value}>{data.label}</MenuItem>)

@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 
 import Button from '../components/Buttons/Button';
 import PokemonComboBox from '../components/ComboBox/PokemonComboBox';
-import StoreProvider, { StoreContext, ActionType } from '../components/StoreContext'
+import StoreProvider, { StoreContext, ActionType, StoreState } from '../components/StoreContext'
 import styles from '../styles/App.module.scss'
 
 interface Props {
@@ -27,8 +27,8 @@ const App: React.VFC<Props> = () => {
       return selected ? selected.id : 'n0'
     }
     return {
-      x0: p('x0'), x1: p('x1'), x2: p('x2'), x3: p('x3'), x4: p('x4'), x5: p('x5'), 
-      y0: p('y0'), y1: p('y1'), y2: p('y2'), y3: p('y3'), y4: p('y4'), y5: p('y5'), 
+      x0: p('x0'), x1: p('x1'), x2: p('x2'), x3: p('x3'), x4: p('x4'), x5: p('x5'),
+      y0: p('y0'), y1: p('y1'), y2: p('y2'), y3: p('y3'), y4: p('y4'), y5: p('y5'),
       version: state.version,
     }
   }
@@ -36,44 +36,48 @@ const App: React.VFC<Props> = () => {
   return (
     <Container>
       <div className={styles.main}>
-        {renderPokeTextBox()}
+        {renderPokeTextBox(state)}
       </div>
       <div className={styles.button}>
-        <Button text="VS" onClick={() => {
-          router.push({ 
+        <Button text="VS" fullWidth onClick={() => {
+          router.push({
             pathname: '/detail',
             query: createQuery()
-         })
+          })
         }} />
       </div>
     </Container>
   );
 }
 
-const renderPokeTextBox = () => {
+const renderPokeTextBox = (state: StoreState) => {
   const { dispatch } = React.useContext(StoreContext)
   const items = [];
-    for (let i = 0; i < 6; i++) {
-      const x_index = "x"+ i
-      const y_index = "y"+ i
-      items.push(
-        <Grid key={i} container justifyContent="center" spacing={2}>
-          <Grid item className={styles.gridItem}>
-            <PokemonComboBox id={x_index} onChange={x => {
-              x.index = x_index
-              dispatch({ type: ActionType.SET_X, payload: { x: x } })
-            }} />
-          </Grid>
-          <span className={styles.separate} />
-          <Grid item>
-            <PokemonComboBox id={y_index} onChange={y => {
-              y.index = y_index
-              dispatch({ type: ActionType.SET_Y, payload: { y: y } })
-            }} />
-          </Grid>
+  for (let i = 0; i < 6; i++) {
+    const xIndex = "x" + i
+    const yIndex = "y" + i
+    const { index: x, ...xOther } = Object(state.x.find(x => x.index === xIndex))
+    const { index: y, ...yOther } = Object(state.y.find(y => y.index === yIndex))
+
+
+    items.push(
+      <Grid key={i} container justifyContent="center" spacing={2}>
+        <Grid item className={styles.gridItem}>
+          <PokemonComboBox index={xIndex} data={Object.keys(xOther).length ? xOther : null} onChange={x => {
+            x.index = xIndex
+            dispatch({ type: ActionType.SET_X, payload: { x: x } })
+          }} />
         </Grid>
-      )
-    }
+        {/* <span className={styles.separate} /> */}
+        <Grid item>
+          <PokemonComboBox index={yIndex} data={Object.keys(yOther).length ? yOther : null} onChange={y => {
+            y.index = yIndex
+            dispatch({ type: ActionType.SET_Y, payload: { y: y } })
+          }} />
+        </Grid>
+      </Grid>
+    )
+  }
   return (
     <React.Fragment>
       {items}

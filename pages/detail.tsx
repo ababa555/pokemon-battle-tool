@@ -70,7 +70,7 @@ const Detail: React.VFC = (props: any) => {
         {renderImage('y')}
         <PokeDetailInput identity='y' id={state.y} />
       </div>
-      <div className={styles.pokeDetailResultWapper}>
+      <div className={styles.resultWapper}>
         <PokeDetailResult />
       </div>
       {/* {props.data && props.data.map((data) => <Todo key={data.id} post={data} />)} */}

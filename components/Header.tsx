@@ -15,10 +15,9 @@ interface Props {
   title: string,
 }
 
-const Header: React.VFC<Props> = ({title}) => {
+const Header: React.VFC<Props> = ({ title }) => {
   const { state, dispatch } = useStoreContext()
   const router = useRouter()
-  console.log(router.query)
 
   const changePage = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     if (e.ctrlKey) {
@@ -29,7 +28,7 @@ const Header: React.VFC<Props> = ({title}) => {
       router.push(('/'))
     }
   }
-  
+
   return (
     <React.Fragment>
       <Stack direction="row">
@@ -62,7 +61,7 @@ const Header: React.VFC<Props> = ({title}) => {
           />
         </span>
       </Stack>
-      <Divider/>
+      <Divider />
     </React.Fragment>
   );
 }
