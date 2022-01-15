@@ -1,7 +1,7 @@
 import React from 'react';
 
-import TextField from '@material-ui/core/TextField';
-import useAutocomplete from '@material-ui/lab/useAutocomplete';
+import TextField from '@mui/material/TextField';
+import { useAutocomplete } from '@mui/base/AutocompleteUnstyled';
 import styles from '../../styles/PokeTextBox.module.scss'
 
 import Image from '../../components/Images/Image'
@@ -74,7 +74,7 @@ const PokemonComboBox: React.FC<Props> = (props) => {
   return (
     <div>
       <div {...getRootProps()}>
-        <TextField variant="outlined" {...getInputProps()} value={selected ? selected.name : ""} inputRef={textFieldRef} />
+        <TextField variant="outlined" inputProps={{ ...getInputProps() }} value={selected ? selected.name : ""} inputRef={textFieldRef} />
         {
           (selected !== null && selected.id) ?
             <Image

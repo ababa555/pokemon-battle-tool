@@ -2,13 +2,13 @@ import React from 'react';
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-import { Divider } from '@material-ui/core';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Stack from '@material-ui/core/Stack';
+import Divider from '@mui/material/Divider';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import Stack from '@mui/material/Stack';
 
 import Select from '../components/Selects/Select';
-import { useStoreContext, ActionType } from './StoreContext';
+import { useSearchContext, ActionType } from '../context/SearchContext';
 import styles from '../styles/Header.module.scss'
 
 interface Props {
@@ -16,7 +16,7 @@ interface Props {
 }
 
 const Header: React.VFC<Props> = ({ title }) => {
-  const { state, dispatch } = useStoreContext()
+  const { state, dispatch } = useSearchContext()
   const router = useRouter()
 
   const changePage = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {

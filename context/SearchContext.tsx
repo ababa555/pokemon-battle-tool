@@ -1,10 +1,17 @@
 import React from 'react';
-import ArrayHelper from '../helpers/ArrayHelper'
+import { ArrayHelper } from '../helpers/ArrayHelper'
 
 export interface StoreState {
-  x: { index: string, id: string, no: string, name: string }[],
-  y: { index: string, id: string, no: string, name: string }[],
+  x: SearchItem[],
+  y: SearchItem[],
   version: number,
+}
+
+interface SearchItem {
+  index: string,
+  id: string,
+  no: string,
+  name: string
 }
 
 interface PayloadState {
@@ -13,7 +20,7 @@ interface PayloadState {
   version?: number,
 }
 
-interface StoreAction {
+interface PayloadAction {
   type: ActionType,
   payload?: PayloadState,
 }
@@ -31,14 +38,14 @@ const initialState = {
   version: 3,
 }
 
-const reducer: React.Reducer<StoreState, StoreAction> = (state, action) => {
+const reducer: React.Reducer<StoreState, PayloadAction> = (state, action) => {
   switch (action.type) {
     case 'SET_X':
       const x = ArrayHelper.addOrReplace(state.x, { ...action.payload.x }, (a, b) => a.index === b.index)
-      return { ...state, x: x.filter(v => v.id !== null) }
+      return { ...state, x: x.filter((v: SearchItem) => v.id !== null) }
     case 'SET_Y':
       const y = ArrayHelper.addOrReplace(state.y, { ...action.payload.y }, (a, b) => a.index === b.index)
-      return { ...state, y: y.filter(v => v.id !== null) }
+      return { ...state, y: y.filter((v: SearchItem) => v.id !== null) }
     case 'SET_VERSION':
       return { ...state, version: action.payload.version }
 
@@ -47,22 +54,22 @@ const reducer: React.Reducer<StoreState, StoreAction> = (state, action) => {
   }
 }
 
-const StoreProvider: React.FC = (props) => {
+const SearchProvider: React.FC = (props) => {
   const [state, dispatch] = React.useReducer(reducer, initialState)
   return (
-    <StoreContext.Provider value={{ state, dispatch }}>
+    <SearchContext.Provider value={{ state, dispatch }}>
       {props.children}
-    </StoreContext.Provider>
+    </SearchContext.Provider>
   )
 }
 
-export default StoreProvider
+export default SearchProvider
 
 interface ContextState {
   state: StoreState,
-  dispatch: React.Dispatch<StoreAction>,
+  dispatch: React.Dispatch<PayloadAction>,
 }
 
-export const StoreContext = React.createContext({} as ContextState);
+export const SearchContext = React.createContext({} as ContextState);
 
-export const useStoreContext = (): ContextState => React.useContext(StoreContext)
+export const useSearchContext = (): ContextState => React.useContext(SearchContext)

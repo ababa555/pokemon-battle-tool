@@ -1,11 +1,11 @@
 import React from 'react';
-import { Container, Divider, Grid } from '@material-ui/core';
+import { Container, Divider, Grid } from '@mui/material';
 import { GetStaticProps, InferGetStaticPropsType } from 'next'
 import { useRouter } from 'next/router'
 
 import Button from '../components/Buttons/Button';
 import PokemonComboBox from '../components/ComboBox/PokemonComboBox';
-import StoreProvider, { StoreContext, ActionType, StoreState } from '../components/StoreContext'
+import { SearchContext, ActionType, StoreState } from '../context/SearchContext'
 import styles from '../styles/App.module.scss'
 
 interface Props {
@@ -13,7 +13,7 @@ interface Props {
 }
 
 const App: React.VFC<Props> = () => {
-  const { state, dispatch } = React.useContext(StoreContext);
+  const { state, dispatch } = React.useContext(SearchContext);
   const router = useRouter()
 
   React.useEffect(() => {
@@ -22,7 +22,7 @@ const App: React.VFC<Props> = () => {
 
   const createQuery = () => {
     const p = (index: string) => {
-      const x_or_y = index.substr(0, 1)
+      const x_or_y = index.substring(0, 1)
       const selected = state[x_or_y].find((x: { index: string; }) => x.index === index)
       return selected ? selected.id : 'n0'
     }
@@ -51,7 +51,7 @@ const App: React.VFC<Props> = () => {
 }
 
 const renderPokeTextBox = (state: StoreState) => {
-  const { dispatch } = React.useContext(StoreContext)
+  const { dispatch } = React.useContext(SearchContext)
   const items = [];
   for (let i = 0; i < 6; i++) {
     const xIndex = "x" + i

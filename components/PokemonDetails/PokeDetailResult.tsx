@@ -1,13 +1,13 @@
 import React from 'react';
 import dynamic from 'next/dynamic'
 
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
+import Card from '@mui/material/Card';
+import CardHeader from '@mui/material/CardHeader';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
+import Divider from '@mui/material/Divider';
 
-import { useDetailContext } from '../DetailContext'
+import { useDetailContext } from '../../context/DetailContext'
 import Image from '../Images/Image'
 import styles from '../../styles/PokeDetailResult.module.scss'
 
@@ -47,7 +47,7 @@ const PokeDetailResult = () => {
       <Typography>
         わざ
       </Typography>
-      
+
       <CardContent>
         <div>
           <Typography>
@@ -86,7 +86,7 @@ const PokeDetailResult = () => {
       <Typography>
         ダメージ
       </Typography>
-      
+
       <CardContent>
         <DamageChart title="[通常]" />
         <DamageChart title="[急所]" />

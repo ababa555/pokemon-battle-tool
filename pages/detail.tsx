@@ -5,7 +5,7 @@ import { GetStaticProps } from 'next'
 import PokeDetailInput from '../components/PokemonDetails/PokeDetailInput'
 import PokeDetailResult from '../components/PokemonDetails/PokeDetailResult'
 import Image from '../components/Images/Image'
-import DetailProvider, { useDetailContext, ActionType } from '../components/DetailContext'
+import DetailProvider, { useDetailContext, ActionType } from '../context/DetailContext'
 import styles from '../styles/Detail.module.scss'
 
 const Detail: React.VFC = (props: any) => {

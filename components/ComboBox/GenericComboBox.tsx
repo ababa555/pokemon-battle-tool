@@ -1,6 +1,6 @@
 import React from 'react';
-import TextField from '@material-ui/core/TextField';
-import useAutocomplete from '@material-ui/lab/useAutocomplete';
+import TextField from '@mui/material/TextField';
+import { useAutocomplete } from '@mui/base/AutocompleteUnstyled';
 import styles from '../../styles/GenericTextBox.module.scss'
 
 interface Props {
@@ -18,6 +18,7 @@ const GenericComboBox: React.FC<Props> = (props) => {
   const [value, setValue] = React.useState(null);
   const {
     getRootProps,
+    getInputLabelProps,
     getInputProps,
     getListboxProps,
     getOptionProps,
@@ -37,23 +38,22 @@ const GenericComboBox: React.FC<Props> = (props) => {
     onChange: (event, newValue) => {
       setValue(newValue);
       if (newValue === null) {
-        props.onChange({id: null, value: null})
+        props.onChange({ id: null, value: null })
         return
       }
       props.onChange(newValue)
     },
   });
+  const inputProps = {};
 
+  // こうする事で、chromeのautocompleteを無効にできるみたい
+  Object.assign(inputProps, { ...getInputProps() }, { autoComplete: 'new-password' })
   return (
     <div>
       <div {...getRootProps()}>
-        <TextField 
-          variant="outlined" 
-          // こうする事で、chromeのautocompleteを無効にできるみたい
-          inputProps={{
-            autoComplete: 'new-password',
-          }} 
-          {...getInputProps()} />
+        <TextField
+          variant="outlined"
+          inputProps={inputProps} />
       </div>
       {groupedOptions.length > 0 ? (
         <ul className={styles.listBox} {...getListboxProps()}>

@@ -1,10 +1,10 @@
 import React from 'react';
 import clsx from 'clsx';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
+import Card from '@mui/material/Card';
+import CardHeader from '@mui/material/CardHeader';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
+import Divider from '@mui/material/Divider';
 
 import GenericComboBox from '../ComboBox/GenericComboBox';
 import Image from '../Images/Image'
@@ -37,10 +37,10 @@ const PokeDetailInput: React.VFC<Props> = (props) => {
           <Typography>
             わざ
           </Typography>
-          <GenericComboBox 
+          <GenericComboBox
             id={`waza_${props.identity}`}
             data={moves}
-            onChange={x => console.log(x)} 
+            onChange={x => console.log(x)}
           />
         </div>
 
@@ -48,10 +48,10 @@ const PokeDetailInput: React.VFC<Props> = (props) => {
           <Typography>
             とくせい
           </Typography>
-          <GenericComboBox 
+          <GenericComboBox
             id={`tokusei_${props.identity}`}
             data={tokusei}
-            onChange={x => console.log(x)} 
+            onChange={x => console.log(x)}
           />
         </div>
 
@@ -59,10 +59,10 @@ const PokeDetailInput: React.VFC<Props> = (props) => {
           <Typography>
             もちもの
           </Typography>
-          <GenericComboBox 
+          <GenericComboBox
             id={`item_${props.identity}`}
             data={items}
-            onChange={x => console.log(x)} 
+            onChange={x => console.log(x)}
           />
         </div>
       </CardContent>
@@ -72,46 +72,46 @@ const PokeDetailInput: React.VFC<Props> = (props) => {
       <Typography>
         攻撃
       </Typography>
-      
+
       <CardContent>
         <div className={styles.grid}>
           <Typography>
             個体値
           </Typography>
-          <GenericComboBox 
+          <GenericComboBox
             id={`kotai_attack_${props.identity}`}
             data={kotai}
-            onChange={x => console.log(x)} 
+            onChange={x => console.log(x)}
           />
         </div>
         <div className={styles.grid}>
           <Typography>
             努力値
           </Typography>
-          <GenericComboBox 
+          <GenericComboBox
             id={`doryoku_attack_${props.identity}`}
             data={doryoku}
-            onChange={x => console.log(x)} 
+            onChange={x => console.log(x)}
           />
         </div>
         <div className={styles.grid}>
           <Typography>
             性格補正
           </Typography>
-          <GenericComboBox 
+          <GenericComboBox
             id={`hosei_attack_${props.identity}`}
             data={hosei}
-            onChange={x => console.log(x)} 
+            onChange={x => console.log(x)}
           />
         </div>
         <div className={styles.grid}>
           <Typography>
             ランク
           </Typography>
-          <GenericComboBox 
+          <GenericComboBox
             id={`rank_attack_${props.identity}`}
             data={rank}
-            onChange={x => console.log(x)} 
+            onChange={x => console.log(x)}
           />
         </div>
       </CardContent>
@@ -126,20 +126,20 @@ const PokeDetailInput: React.VFC<Props> = (props) => {
           <Typography>
             個体値
           </Typography>
-          <GenericComboBox 
+          <GenericComboBox
             id={`kotai_hp_${props.identity}`}
             data={kotai}
-            onChange={x => console.log(x)} 
+            onChange={x => console.log(x)}
           />
         </div>
         <div className={styles.grid}>
           <Typography>
             努力値
           </Typography>
-          <GenericComboBox 
+          <GenericComboBox
             id={`doryoku_hp_${props.identity}`}
             data={doryoku}
-            onChange={x => console.log(x)} 
+            onChange={x => console.log(x)}
           />
         </div>
       </CardContent>

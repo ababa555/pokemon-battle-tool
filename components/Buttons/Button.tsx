@@ -1,5 +1,5 @@
 import React from 'react';
-import { default as MuiButton } from '@material-ui/core/Button';
+import { default as MuiButton } from '@mui/material/Button';
 
 interface ButtonProps {
   text: string;
@@ -9,9 +9,9 @@ interface ButtonProps {
 
 const Button: React.FC<ButtonProps> = (props) => {
   return (
-  <MuiButton variant="contained" color="primary" onClick={props.onClick} fullWidth={props.fullWidth}>
-    {props.text}
-  </MuiButton>
+    <MuiButton variant="contained" color="primary" onClick={props.onClick} fullWidth={props.fullWidth}>
+      {props.text}
+    </MuiButton>
   )
 }
 

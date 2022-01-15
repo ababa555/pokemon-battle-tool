@@ -1,8 +1,8 @@
 // import '../styles/global.css'
 import { AppProps } from 'next/app'
 import Header from '../components/Header';
-import StoreProvider from '../components/StoreContext'
-import DetailContext from '../components/DetailContext'
+import StoreProvider from '../context/SearchContext'
+import DetailContext from '../context/DetailContext'
 
 function App({ Component, pageProps }: AppProps) {
   return (

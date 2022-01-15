@@ -5,7 +5,7 @@ interface StoreState {
   y: string,
 }
 
-interface StoreAction {
+interface PayloadAction {
   type: ActionType,
   payload?: string,
 }
@@ -20,8 +20,8 @@ const initialState = {
   y: 'n1',
 }
 
-const reducer: React.Reducer<StoreState, StoreAction> = (state, action) => {
-  switch(action.type) {
+const reducer: React.Reducer<StoreState, PayloadAction> = (state, action) => {
+  switch (action.type) {
     case 'SET_X':
       return { ...state, x: action.payload }
     case 'SET_Y':
@@ -34,17 +34,17 @@ const reducer: React.Reducer<StoreState, StoreAction> = (state, action) => {
 const DetailProvider: React.FC = (props) => {
   const [state, dispatch] = React.useReducer(reducer, initialState)
   return (
-    <DetailContext.Provider value={{state, dispatch}}>
+    <DetailContext.Provider value={{ state, dispatch }}>
       {props.children}
     </DetailContext.Provider>
-  )  
+  )
 }
 
 export default DetailProvider
 
 interface ContextState {
   state: StoreState,
-  dispatch: React.Dispatch<StoreAction>,
+  dispatch: React.Dispatch<PayloadAction>,
 }
 
 export const DetailContext = React.createContext({} as ContextState);

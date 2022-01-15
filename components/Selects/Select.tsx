@@ -1,9 +1,9 @@
 import React from 'react';
 
-import FormControl from '@material-ui/core/FormControl';
-import MuiSelect from '@material-ui/core/Select';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import MuiSelect from '@mui/material/Select';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
 
 import styles from '../../styles/Select.module.scss'
 
