@@ -31,7 +31,7 @@ const reducer: React.Reducer<StoreState, PayloadAction> = (state, action) => {
   }
 }
 
-const DetailProvider: React.FC = (props) => {
+export const DetailProvider: React.FC = (props) => {
   const [state, dispatch] = React.useReducer(reducer, initialState)
   return (
     <DetailContext.Provider value={{ state, dispatch }}>
@@ -39,8 +39,6 @@ const DetailProvider: React.FC = (props) => {
     </DetailContext.Provider>
   )
 }
-
-export default DetailProvider
 
 interface ContextState {
   state: StoreState,

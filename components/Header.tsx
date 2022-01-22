@@ -56,7 +56,7 @@ const Header: React.VFC<Props> = ({ title }) => {
               { label: 'ソード・シールド', value: 3 },
               { label: 'ブリリアントダイヤモンド・シャイニングパール', value: 4 },
             ]}
-            disabled={router.pathname === '/' ? false : true}
+            disabled={router.pathname !== '/'}
             handleChange={(e: number) => dispatch({ type: ActionType.SET_VERSION, payload: { version: e } })}
           />
         </span>

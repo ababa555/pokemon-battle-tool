@@ -54,7 +54,7 @@ const reducer: React.Reducer<StoreState, PayloadAction> = (state, action) => {
   }
 }
 
-const SearchProvider: React.FC = (props) => {
+export const SearchProvider: React.FC = (props) => {
   const [state, dispatch] = React.useReducer(reducer, initialState)
   return (
     <SearchContext.Provider value={{ state, dispatch }}>
@@ -62,8 +62,6 @@ const SearchProvider: React.FC = (props) => {
     </SearchContext.Provider>
   )
 }
-
-export default SearchProvider
 
 interface ContextState {
   state: StoreState,

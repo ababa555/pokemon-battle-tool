@@ -1,18 +1,18 @@
 // import '../styles/global.css'
 import { AppProps } from 'next/app'
 import Header from '../components/Header';
-import StoreProvider from '../context/SearchContext'
-import DetailContext from '../context/DetailContext'
+import { SearchProvider } from '../context/SearchContext'
+import { DetailProvider } from '../context/DetailContext'
 
 function App({ Component, pageProps }: AppProps) {
   return (
     <>
-      <StoreProvider>
+      <SearchProvider>
         <Header title="ポケモン対戦支援" />
-        <DetailContext>
+        <DetailProvider>
           <Component {...pageProps} />
-        </DetailContext>
-      </StoreProvider>
+        </DetailProvider>
+      </SearchProvider>
     </>
   )
 }
